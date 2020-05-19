@@ -20,7 +20,7 @@ $(function(){
        
        
        let request = $.ajax({
-           method: "GET",
+           method: "POST",
            url: "post.php",
            data: form,
            dataType: "json"
@@ -36,9 +36,18 @@ $(function(){
        });
 
        /***  .done é executado qdo a requisação retorna com sucesso. ***/
-       request.done(function(e){
-            console.log("Done");
-            console.log(e);
+       request.done(function(obj){
+           
+
+            /***
+             * O laço for...in  interage sobre propriedades enumeradas de um objeto, na ordem original de inserção.  
+             * O laço pode ser executado para cada propriedade distinta do objeto.
+            */
+           
+            for( let prop in obj){
+                   $(':input[name='+prop+']').val(obj[prop]);
+            }
+            
         });
         /*** .fail em caso de falha. */
        request.fail(function(e){
