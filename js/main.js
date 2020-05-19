@@ -37,17 +37,22 @@ $(function(){
 
        /***  .done é executado qdo a requisação retorna com sucesso. ***/
        request.done(function(obj){
-           
+            $('#msg').html(obj.msg);
+
+            if(obj.status){
+                $('#AjaxRequest').each(function(){
+                    this.reset();
+                });
+            }
 
             /***
              * O laço for...in  interage sobre propriedades enumeradas de um objeto, na ordem original de inserção.  
              * O laço pode ser executado para cada propriedade distinta do objeto.
-            */
-           
+            
             for( let prop in obj){
                    $(':input[name='+prop+']').val(obj[prop]);
             }
-            
+            */
         });
         /*** .fail em caso de falha. */
        request.fail(function(e){

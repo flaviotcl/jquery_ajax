@@ -28,8 +28,22 @@ if($_GET){
 
 
 if($_POST){
-    $_POST['name'] = $_POST['name']." DB"; 
+  /*  $_POST['name'] = $_POST['name']." DB"; 
     $_POST['email'] = $_POST['email']." DB";
     $_POST['tel'] = $_POST['tel']." DB";
-    echo json_encode($_POST); exit;
+  */ 
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $tel = $_POST['tel'];
+
+    if($name == ""){
+        echo json_encode(["status"=>false, "msg"=>"Preencha o nome !"]); exit;
+    }
+    if($email == ""){
+        echo json_encode(["status"=>false, "msg"=>"Preencha o email !"]); exit;
+    }
+    if($tel == ""){
+        echo json_encode(["status"=>false, "msg"=>"Preencha o telefone !"]); exit;
+    }
+    echo json_encode(["status"=>true, "msg"=>"Sucess !"]); exit;
 }
