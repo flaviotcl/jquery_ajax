@@ -38,7 +38,7 @@ $(function(){
        /***  .done é executado qdo a requisação retorna com sucesso. ***/
        request.done(function(e){
             console.log("Done");
-            console.log(e.email);
+            console.log(e);
         });
         /*** .fail em caso de falha. */
        request.fail(function(e){

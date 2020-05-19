@@ -1,6 +1,8 @@
 <?php
 
-
+if($_REQUEST){
+    echo json_encode(["msg"=>"Request"]); exit;
+}
 
 //$_GET ? var_dump($_GET): false;
 
