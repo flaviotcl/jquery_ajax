@@ -17,9 +17,9 @@ if($_GET){
    //echo "<name>{$_GET['name']}</name>";
    
    //Retornando JSON
-   echo json_encode($_GET); exit;
-
-
+   //echo json_encode($_GET); exit;
+    $data = listAll();
+    echo json_encode($data); exit;
 }
 
 //$result = $_POST ?? var_dump($_POST);
@@ -69,4 +69,12 @@ function save($data){
     $stmt->execute();
     return $db->lastInsertId();
 
+}
+
+function listAll(){
+    $db = conn();
+    $query ="Select * from `contacts`";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll();
 }

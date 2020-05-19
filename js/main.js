@@ -1,4 +1,15 @@
 $(function(){
+
+    var requestList = $.ajax({
+        method:"GET",
+        url:"post.php",
+        data:{listAll:"list"},
+        dataType:"json"
+    });
+    requestList.done(function(e){
+        console.log(e);
+    });
+
     $('#AjaxRequest').submit(function(){
         
         /**
