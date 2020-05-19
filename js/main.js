@@ -6,8 +6,16 @@ $(function(){
         data:{listAll:"list"},
         dataType:"json"
     });
-    requestList.done(function(e){
-        console.log(e);
+    requestList.done(function(obj){
+        var table = '<thead><tr><th>#</th><th>Name</th><th>Email</th><th>Telephone</th></tr></thead><tbody>';
+        for(var prop in obj){
+            table += '<tr><th scope="row">'+obj[prop].id+'</th>';
+            table += '<td>'+obj[prop].name+'</td>';
+            table += '<td>'+obj[prop].email+'</td>';
+            table += '<td>'+obj[prop].tel+'</td></tr>';
+        }
+        table +='</tbody>';
+        $('#contacts').html(table);
     });
 
     $('#AjaxRequest').submit(function(){
