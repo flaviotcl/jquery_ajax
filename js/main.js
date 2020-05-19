@@ -22,7 +22,8 @@ $(function(){
        let request = $.ajax({
            method: "GET",
            url: "post.php",
-           data: form
+           data: form,
+           dataType: "json"
            //data: formArray
            /*** Forma + trabalhosa de buscar os campos do Form ***/
            /***
@@ -36,14 +37,17 @@ $(function(){
 
        /***  .done é executado qdo a requisação retorna com sucesso. ***/
        request.done(function(e){
-            console.log(e);
+            console.log("Done");
+            console.log(e.email);
         });
         /*** .fail em caso de falha. */
        request.fail(function(e){
+            console.log("Fail");
             console.log(e);
        })
        /*** .always é executado em todos os casos. */
        request.always(function(e){
+            console.log("Always");
             console.log(e);
        })
        return false;
