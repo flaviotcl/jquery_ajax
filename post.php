@@ -22,7 +22,6 @@ if($_GET){
 
 }
 
-
 //$result = $_POST ?? var_dump($_POST);
 //var_dump( $result);
 
@@ -45,5 +44,29 @@ if($_POST){
     if($tel == ""){
         echo json_encode(["status"=>false, "msg"=>"Preencha o telefone !"]); exit;
     }
-    echo json_encode(["status"=>true, "msg"=>"Sucess !"]); exit;
+    $id = save($_POST);
+
+    if($id){
+        echo json_encode(["status"=>true, "msg"=>"Sucess ! ID: {$id}"]); exit;
+    }else{
+        echo json_encode(["status"=>false, "msg"=>"Error !"]); exit;
+    }
+    
+}
+
+function conn(){
+    $conn = new \PDO("mysql:host=localhost;dbname=ajax_jquery","root","123456");
+    return $conn;
+}
+
+function save($data){
+    $db =  conn();
+    $query = "INSERT INTO `contacts` (`name`,`email`,`tel`) VALUES (:name,:email,:tel)";
+    $stmt = $db->prepare($query);
+    $stmt->bindValue(':name',$data['name']);
+    $stmt->bindValue(':email',$data['email']);
+    $stmt->bindValue(':tel',$data['tel']);
+    $stmt->execute();
+    return $db->lastInsertId();
+
 }
