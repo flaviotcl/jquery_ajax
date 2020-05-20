@@ -62,6 +62,12 @@ $(function(){
                 $('#AjaxRequest').each(function(){
                     this.reset();
                 });
+                var table = '<tr><th scope="row">'+ obj.contacts.id+'</th>';
+                table += '<td>'+obj.contacts.name+'</td>';
+                table += '<td>'+obj.contacts.email+'</td>';
+                table += '<td>'+obj.contacts.tel+'</td></tr>';
+                $('#contacts tbody').prepend(table);
+
             }
 
             /***
@@ -78,11 +84,14 @@ $(function(){
             console.log("Fail");
             console.log(e);
        })
-       /*** .always é executado em todos os casos. */
+       /*** .always é executado em todos os casos.
+       /*** 
        request.always(function(e){
             console.log("Always");
             console.log(e);
        })
+        */
+       
        return false;
     });
 });

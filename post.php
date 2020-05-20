@@ -47,7 +47,8 @@ if($_POST){
     $id = save($_POST);
 
     if($id){
-        echo json_encode(["status"=>true, "msg"=>"Sucess ! ID: {$id}"]); exit;
+        $data = find($id);
+        echo json_encode(["status"=>true,"msg"=>"Success! Id: {$id}","contacts"=>$data]);exit;
     }else{
         echo json_encode(["status"=>false, "msg"=>"Error !"]); exit;
     }
@@ -73,8 +74,19 @@ function save($data){
 
 function listAll(){
     $db = conn();
-    $query ="Select * from `contacts`";
+    $query ="Select * from `contacts` order by id DESC";
     $stmt = $db->prepare($query);
     $stmt->execute();
     return $stmt->fetchAll();
+}
+
+
+
+function find($id){
+    $db = conn();
+    $query ="Select * from `contacts` where id=:id";
+    $stmt = $db->prepare($query);
+    $stmt->bindValue(':id',$id);
+    $stmt->execute();
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
 }
